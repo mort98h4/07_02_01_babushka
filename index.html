@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07_02_01_bistro_babushka</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/dcg7vmg.css">
+</head>
+
+<body>
+    <section id="splash">
+        <div class="buttons">
+            <div class="menu_button">
+                <p>Menu</p>
+            </div>
+            <div class="book_button">
+                <p>Book bord</p>
+            </div>
+        </div>
+        <div class="titel">
+            <div class="bistro">
+                <h1>Bistro</h1>
+            </div>
+            <div class="babushka">
+                <h1>Babushka</h1>
+            </div>
+        </div>
+    </section>
+
+    <section id="popup">
+        <article>
+            <div class="popup_top">
+                <div id="luk">X</div>
+            </div>
+            <div class="popup_bottom">
+                <div class="popup_img">
+                    <img src="" alt="">
+                </div>
+                <div class="popup_text">
+                    <h2></h2>
+                    <p class="oprindelse">Oprindelsesland: </p>
+                    <p class="lang"></p>
+                    <p class="pris2"></p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <main>
+        <nav id="nav">
+            <div class="filter valgt" data-kategori="alle">Menu</div>
+            <div class="filter" data-kategori="forretter">Forretter</div>
+            <div class="filter" data-kategori="hovedretter">Hovedretter</div>
+            <div class="filter" data-kategori="desserter">Desserter</div>
+            <div class="filter" data-kategori="sideorders">Side orders</div>
+            <div class="filter" data-kategori="drikkevarer">Drikkevarer</div>
+        </nav>
+        <h2 class="overskrift">Menu</h2>
+        <section id="container">
+        </section>
+        <template>
+            <article class="ret">
+                <div class="top">
+                    <img src="">
+                </div>
+                <div class="bottom">
+                    <div class="bottom_top">
+                        <h3 class="navn"></h3>
+                        <p class="kort"></p>
+                    </div>
+                    <div class="bottom_bottom">
+                        <p class="pris"></p>
+                    </div>
+                </div>
+            </article>
+        </template>
+    </main>
+    <script>
+        let retter;
+        let filter = "alle";
+        document.addEventListener("DOMContentLoaded", start);
+
+        async function start() {
+            console.log("start");
+            const JSONData = await fetch("https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json");
+            personer = await JSONData.json();
+            addEventListenersToButtons();
+            visRetter();
+
+        }
+
+        function visRetter() {
+            console.log("visRetter");
+            const container = document.querySelector("#container");
+            const template = document.querySelector("template");
+            container.innerHTML = "";
+            const popup = document.querySelector("#popup");
+
+
+            personer.feed.entry.forEach(ret => {
+                if (filter == "alle" || filter == ret.gsx$kategori.$t.toLocaleLowerCase()) {
+                    let klon = template.cloneNode(true).content;
+                    klon.querySelector("img").src = "imgs/large/" + `${ret.gsx$billede.$t}` + ".jpg";
+                    klon.querySelector(".navn").textContent = ret.gsx$navn.$t;
+                    klon.querySelector(".kort").textContent += ret.gsx$kort.$t;
+                    klon.querySelector(".pris").textContent = ret.gsx$pris.$t + ",-";
+
+                    klon.querySelector("article").addEventListener("click", () => visDetaljer(ret));
+
+                    container.appendChild(klon);
+                }
+
+            })
+        }
+
+        document.querySelector(".menu_button").addEventListener("click", () => location.href = "#nav");
+
+        document.querySelector("#luk").addEventListener("click", () => popup.style.display = "none");
+
+        function visDetaljer(ret) {
+            console.log(ret);
+            popup.style.display = "block";
+            popup.querySelector("img").src = "imgs/large/" + `${ret.gsx$billede.$t}` + ".jpg";
+            popup.querySelector("h2").textContent = ret.gsx$navn.$t;
+            popup.querySelector(".oprindelse").textContent = `Oprindelsesland: ${ret.gsx$oprindelse.$t}`;
+            popup.querySelector(".lang").textContent = ret.gsx$lang.$t;
+            popup.querySelector(".pris2").textContent = ret.gsx$pris.$t + ",-";
+        }
+
+        function addEventListenersToButtons() {
+            document.querySelectorAll(".filter").forEach((button) => {
+                button.addEventListener("click", filterButtons);
+            });
+        }
+
+        function filterButtons() {
+            filter = this.dataset.kategori;
+            document.querySelector(".overskrift").textContent = this.textContent;
+            document.querySelectorAll(".filter").forEach((button) => {
+                button.classList.remove("valgt");
+            })
+            this.classList.add("valgt");
+            visRetter();
+        }
+
+    </script>
+</body>
+
+</html>

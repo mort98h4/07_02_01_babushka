@@ -1,0 +1,244 @@
+  @import url("https://use.typekit.net/dcg7vmg.css");
+
+
+  * {
+      box-sizing: border-box;
+      margin: 0 auto;
+  }
+
+  body {
+      background-color: #3c3c3c;
+  }
+
+  main {
+      max-width: 1000px;
+  }
+
+  img {
+      width: 100%;
+  }
+
+  #splash {
+      max-width: none;
+      width: 100vw;
+      height: 100vh;
+      background-image: url(splashbillede.png);
+      background-size: cover;
+      background-position: 70% 80%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      box-sizing: border-box;
+  }
+
+  .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      flex-direction: column;
+      flex-basis: 100%;
+      justify-content: flex-end;
+      font-family: dystopian, sans-serif;
+      font-size: 1.2rem;
+  }
+
+  .menu_button,
+  .book_button {
+      background-color: #3c3c3c;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      width: 200px;
+      height: 50px;
+      margin: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .menu_button:hover,
+  .book_button:hover {
+      color: #ffd700;
+      border: 2px solid #ffd700;
+      cursor: pointer;
+  }
+
+  .titel {
+      color: #ffffff;
+      font-size: 2rem;
+      line-height: 0.9;
+      font-family: plumeroscript, sans-serif;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+  }
+
+  .babushka {
+      color: #ffd700;
+  }
+
+  nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      font-family: dystopian, sans-serif;
+  }
+
+  .filter {
+      margin: 10px;
+      cursor: pointer;
+  }
+
+  .filter:hover {
+      color: #ffd700;
+  }
+
+  .valgt {
+      color: #ffd700;
+      border-bottom: 2px solid #ffd700;
+  }
+
+  .overskrift {
+      color: #ffffff;
+      font-family: plumeroscript, sans-serif;
+      font-size: 2.5rem;
+      margin-left: 10px;
+      text-align: center;
+  }
+
+  #container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-gap: 5px;
+      margin: 10px;
+  }
+
+  @media (min-width: 800px) {
+      .titel {
+          flex-direction: row;
+          align-items: center;
+          margin-left: 100px;
+          font-size: 2.5rem;
+      }
+
+      .overskrift {
+          text-align: left;
+      }
+
+
+  }
+
+  @media (min-width: 1000px) {
+      .top img {
+          max-height: 216px;
+      }
+  }
+
+  .bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-around;
+  }
+
+  .bottom_top {
+      flex-basis: 100%;
+  }
+
+  .bottom_bottom {
+      flex-basis: 100%;
+  }
+
+  .navn {
+      flex-basis: 100%;
+      color: #ffd700;
+      font-family: dystopian, sans-serif;
+      margin: 5px 0;
+  }
+
+  .kort {
+      flex-basis: 100%;
+      color: #ffffff;
+      font-family: dystopian, sans-serif;
+      margin-bottom: 5px;
+  }
+
+  .pris {
+      flex-basis: 100%;
+      color: #ffd700;
+      font-family: dystopian, sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      text-align: end;
+      margin: 5px 0;
+  }
+
+  #popup {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, .8);
+      display: none;
+      overflow: scroll;
+  }
+
+  #popup article {
+      width: 80vw;
+      background-color: #3c3c3c;
+      margin: 4rem auto;
+      border-radius: 5px;
+  }
+
+  .popup_top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      text-align: right;
+
+  }
+
+  #luk {
+      color: #ffffff;
+      font-family: sans-serif;
+      padding: 10px;
+      margin: 0;
+      cursor: pointer;
+  }
+
+  .popup_bottom {
+      display: flex;
+      flex-wrap: wrap;
+  }
+
+  .popup_img {
+      flex-grow: 1;
+      flex-basis: 45%;
+      padding: 10px;
+  }
+
+  .popup_text {
+      flex-grow: 1;
+      flex-basis: 45%;
+      padding: 10px;
+      font-family: dystopian, sans-serif;
+      color: #ffffff;
+  }
+
+  .popup_text h2 {
+      color: #ffd700;
+  }
+
+  .lang {
+      margin-top: 20px;
+  }
+
+  .pris2 {
+      color: #ffd700;
+      font-family: dystopian, sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      text-align: end;
+      margin: 5px;
+  }
